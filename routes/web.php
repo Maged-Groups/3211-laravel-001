@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\ServiceController;
 // use App\Http\Controllers\ItemController;
 use App\Http\Controllers\{
+    InitController,
     ProductController,
-// UserController,
-// CommentController,
-// ServiceController,
-// ItemController,
+    // UserController,
+    // CommentController,
+    // ServiceController,
+    // ItemController,
 };
 
 Route::view('/', 'welcome');
@@ -59,14 +60,14 @@ Route::get('posts/{post}', fn($post) => view('posts.view', ['post' => $post]));
 // Route::resource('services', ServiceController::class);
 // Route::resource('items', ItemController::class);
 
-Route::resources([
-    'products' => ProductController::class,
-]);
+Route::resources([]);
 
 // Create the following controllers
 // 'users' 
 // 'comments' 
 // 'services' 
 // 'items' 
- 
+
+Route::get('init', [InitController::class, 'models']);
+
 Route::fallback(fn() => view('404'));
