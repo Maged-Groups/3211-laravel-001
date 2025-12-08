@@ -21,7 +21,7 @@ class PostFactory extends Factory
         $randNum = rand(1, 1000);
 
         return [
-            'post_title' => $this->faker->title(),
+            'post_title' => $this->faker->text(),
             'post_body' => $this->faker->paragraph(),
             'thumbnail' => "https://picsum.photos/id/$randNum/600/600",
             'user_id' => User::all()->random()->id,

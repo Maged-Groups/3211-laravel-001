@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
             // UserSeeder::class,
             // PostStatusSeeder::class,
             // ReactionTypeSeeder::class,
-            PostSeeder::class,
-            // CommentSeeder::class,
+            // PostSeeder::class,
+            CommentSeeder::class,
             // ReplySeeder::class,
             // ReactionSeeder::class
         ];

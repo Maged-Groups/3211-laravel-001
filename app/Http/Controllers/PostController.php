@@ -13,7 +13,23 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // $posts = Post::all();
+        $posts = Post::with(['user', 'postStatus'])->get();
+        // $posts = Post::where('user_id', '=', 100)->get();
+        // $posts = Post::where('user_id', '=', '100')->get();
+        // Shorten the where method if the condition is (=)
+        // $posts = Post::where('user_id', '100')->get();
+        // $posts = Post::where('user_id', 350)->get();
+        // $posts = Post::where('user_id', 350)->where('post_status_id', 4)->get();
+        // $posts = Post::where(['user_id' => 350, 'post_status_id' => 4])->get();
+
+        // $posts = Post::where('post_title', 'like', '%ipsum%')->get();
+        // $posts = Post::whereAll(['post_title', 'post_body'], 'like', '%ipsum%')->get(); // AND
+        // $posts = Post::whereAny(['post_title', 'post_body'], 'like', '%ipsum%')->get(); // OR
+        // $posts = Post::all(['post_title', 'id', 'thumbnail']);
+        // $posts = Post::get(['post_title', 'id', 'thumbnail']);
+
+        return $posts;
     }
 
     /**
@@ -37,7 +53,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return $post->load(['user', 'postStatus', 'comments.user']);
     }
 
     /**
