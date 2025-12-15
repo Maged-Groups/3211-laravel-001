@@ -16,13 +16,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $seeders = [
-            // UserSeeder::class,
-            // PostStatusSeeder::class,
-            // ReactionTypeSeeder::class,
-            // PostSeeder::class,
+            UserSeeder::class,
+            PostStatusSeeder::class,
+            ReactionTypeSeeder::class,
+            PostSeeder::class,
             CommentSeeder::class,
-            // ReplySeeder::class,
-            // ReactionSeeder::class
+            ReplySeeder::class,
+            ReactionSeeder::class
         ];
 
         foreach ($seeders as $seeder) {

@@ -33,5 +33,8 @@ Route::controller(InitController::class)->prefix('init')->group(
     }
 );
 
+Route::get('test-a', function () {
+    return 'TEST WEB';
+});
 
 Route::fallback(fn() => view('404'));
