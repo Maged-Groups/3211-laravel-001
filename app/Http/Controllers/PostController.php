@@ -5,16 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // return $request;
         // $posts = Post::all();
-        $posts = Post::with(['user', 'postStatus'])->get();
+        // $posts = Post::with(['user', 'postStatus'])->get();
         // $posts = Post::where('user_id', '=', 100)->get();
         // $posts = Post::where('user_id', '=', '100')->get();
         // Shorten the where method if the condition is (=)
@@ -28,6 +30,10 @@ class PostController extends Controller
         // $posts = Post::whereAny(['post_title', 'post_body'], 'like', '%ipsum%')->get(); // OR
         // $posts = Post::all(['post_title', 'id', 'thumbnail']);
         // $posts = Post::get(['post_title', 'id', 'thumbnail']);
+
+        $per_page = $request->per_page ?? 10;
+
+        $posts = Post::paginate($per_page);
 
         return $posts;
     }

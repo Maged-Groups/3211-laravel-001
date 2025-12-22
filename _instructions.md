@@ -20,6 +20,11 @@ composer global require laravel/installer
 composer laravel new
 ```
 
+# Create an App Key if not exists
+```bash
+php artisan key:gen
+```
+
 # Run Laravel App
 
 -   Open terminal and type

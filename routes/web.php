@@ -4,25 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
     InitController,
-    UserController,
-    PostController,
-    PostStatusController,
-    ReactionTypeController,
-    CommentController,
-    ReplyController
 };
 
 Route::view('/', 'welcome');
 
-Route::resources([
-    'users' => UserController::class,
-    'posts' => PostController::class,
-    'post-statuses' => PostStatusController::class,
-    'reaction-types' => ReactionTypeController::class,
-    'comments' => CommentController::class,
-    'replies' => ReplyController::class,
-]);
- 
 Route::controller(InitController::class)->prefix('init')->group(
     function () {
         Route::get('models', 'models');
@@ -32,9 +17,5 @@ Route::controller(InitController::class)->prefix('init')->group(
         Route::get('fixes', 'fixes');
     }
 );
-
-Route::get('test-a', function () {
-    return 'TEST WEB';
-});
 
 Route::fallback(fn() => view('404'));
