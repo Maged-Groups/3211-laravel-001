@@ -1,0 +1,325 @@
+{
+  "info": {
+    "_postman_id": "30e524fc-347b-4d98-a1ef-9dc129f5c390",
+    "name": "Auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "With Token",
+      "item": [
+        {
+          "name": "Change Password",
+          "id": "1d24a7be-1a33-444a-9361-d5123a083f72",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "old_password",
+                  "value": "newpassword",
+                  "type": "text",
+                  "uuid": "85fcbdb8-25ec-47c3-b180-2d4a9804a537"
+                },
+                {
+                  "key": "new_password",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "ec1614b8-2a37-40f2-90a2-73440df3b8f1"
+                },
+                {
+                  "key": "new_password_confirmation",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "a5ded4f8-305c-4efa-9e69-9753296ec6f2"
+                },
+                {
+                  "key": "roles",
+                  "value": "admin",
+                  "type": "text",
+                  "uuid": "5041e371-860e-4e2f-bb78-791a5efca0fa"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{auth_api}}/change-password",
+              "host": [
+                "{{auth_api}}"
+              ],
+              "path": [
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Active Login Sessions",
+          "id": "204e703a-780f-47c6-8393-2f5ccfb53cde",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{auth_api}}/active-sessions",
+              "host": [
+                "{{auth_api}}"
+              ],
+              "path": [
+                "active-sessions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout Current",
+          "id": "d398f119-8e02-4314-8932-2f25b5ab9640",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{auth_api}}/logout-current",
+              "host": [
+                "{{auth_api}}"
+              ],
+              "path": [
+                "logout-current"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout All",
+          "id": "a8771256-f62d-4aae-8283-67d556c998c7",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{auth_api}}/logout-all",
+              "host": [
+                "{{auth_api}}"
+              ],
+              "path": [
+                "logout-all"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout Others",
+          "id": "0e4efb54-dd55-48d9-8d80-9d1e56c3cb48",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{auth_api}}/logout-others",
+              "host": [
+                "{{auth_api}}"
+              ],
+              "path": [
+                "logout-others"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "03aca4bd-2b53-4c18-a373-ed2f10c3466f",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{token}}",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Without Token",
+      "item": [
+        {
+          "name": "Register",
+          "id": "6ff7ffb3-e556-485b-aecc-481d1a6f6c90",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Yaseen",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "yaseen@company.edu",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "type": "text"
+                },
+                {
+                  "key": "password_confirmation",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "af22e8f0-2af0-45a6-ab4f-68944bd1df6e"
+                },
+                {
+                  "key": "phone",
+                  "value": "01234567892",
+                  "type": "text"
+                },
+                {
+                  "key": "profile_photo",
+                  "type": "file",
+                  "src": [
+                    "/C:/Users/NH/Downloads/e57811c9f62050480a6348778412692d.jpg"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{auth_api}}/register",
+              "host": [
+                "{{auth_api}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "id": "255d97fe-b6b9-4d0f-8453-2a5425eee5b0",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/vnd.api+json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "yaseen@company.edu",
+                  "type": "text",
+                  "uuid": "e8c7dc3b-b5f0-4438-b784-dee4337c0aa7"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "61c1c34d-d419-4f66-a7c1-dce2d07536a4"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{auth_api}}/login",
+              "host": [
+                "{{auth_api}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "9a2437ac-1ca4-4b58-8eab-86f3ea27e618"
+    }
+  ],
+  "variable": [
+    {
+      "id": "c340e4a4-f180-44d5-81cd-896dff48e909",
+      "key": "auth_api",
+      "value": ""
+    }
+  ]
+}

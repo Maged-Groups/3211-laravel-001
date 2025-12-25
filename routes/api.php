@@ -28,13 +28,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::controller(AuthController::class)->prefix('auth')->group(function () {
         Route::post('change-password', 'change_password');
-        Route::post('logout', 'logout');
+        Route::get('active-sessions', 'active_sessions');
+        Route::get('logout-current', 'logout_current');
+        Route::get('logout-all', 'logout_all');
+        Route::get('logout-others', 'logout_others');
     });
 
 });
 
 
-// Un-Protected Routes
+// Unprotected Routes
 Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::post('login', 'login');
     Route::post('register', 'register');
