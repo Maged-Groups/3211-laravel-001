@@ -33,6 +33,94 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Delete Post",
+      "id": "f924b677-c36f-4851-8622-c3617552b3a6",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{posts_api}}/60",
+          "host": [
+            "{{posts_api}}"
+          ],
+          "path": [
+            "60"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Restore Post",
+      "id": "31983173-40f9-4785-9102-470a6b7ecc14",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{posts_api}}/60/restore",
+          "host": [
+            "{{posts_api}}"
+          ],
+          "path": [
+            "60",
+            "restore"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Show Post",
+      "id": "4bd50762-5627-42b1-b1cb-acaf04bfcf36",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{posts_api}}/60",
+          "host": [
+            "{{posts_api}}"
+          ],
+          "path": [
+            "60"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "auth": {
@@ -44,5 +132,13 @@
         "type": "string"
       }
     ]
-  }
+  },
+  "variable": [
+    {
+      "id": "b32f7534-6e8e-4766-b743-7a1db11737bb",
+      "key": "posts_api",
+      "value": "",
+      "type": "default"
+    }
+  ]
 }

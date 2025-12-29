@@ -23,7 +23,7 @@ class AuthController extends Controller
         if ($authenticated) {
             $user = auth()->user();
 
-            $token = $user->createToken('login', explode(',', $user->roles), now()->addSeconds(20))->plainTextToken;
+            $token = $user->createToken('login', $user->roles, now()->addDays(360))->plainTextToken;
             $user->token = $token;
 
             return $user;
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         $user = User::create($data);
 
-        $token = $user->createToken('register', explode(',', $user->roles), now()->addMinutes(20))->plainTextToken;
+        $token = $user->createToken('register', $user->roles, now()->addMinutes(20))->plainTextToken;
 
         $user->token = $token;
 

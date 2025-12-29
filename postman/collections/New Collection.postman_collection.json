@@ -4,5 +4,78 @@
     "name": "Users",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-  "item": []
+  "item": [
+    {
+      "name": "All Users",
+      "id": "aaa4c068-df68-41e2-bc96-ecddcf905a2c",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{users_api}}",
+          "host": [
+            "{{users_api}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Show User",
+      "id": "a933fbd6-5f26-4478-acab-8b953dac37bf",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{users_api}}/51",
+          "host": [
+            "{{users_api}}"
+          ],
+          "path": [
+            "51"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "id": "94ea0fe5-ee35-4e0b-8321-447805aec0ca",
+      "key": "users_api",
+      "value": ""
+    }
+  ]
 }

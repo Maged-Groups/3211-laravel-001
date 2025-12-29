@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -13,6 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny', auth()->user());
+
         return User::all();
         // return User::get();
         // return User::all()->random()->id;
@@ -42,6 +45,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        Gate::authorize('view', $user);
+
         return $user;
     }
 

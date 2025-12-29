@@ -12,7 +12,13 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        $route_roles = ['view-users', 'admin', 'editor'];
+
+        $user_roles = $user->roles;
+
+        $has_roles = array_intersect($user_roles, $route_roles);
+
+        return count($has_roles) > 0;
     }
 
     /**
@@ -20,7 +26,18 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return false;
+        $logged_in_roles = $user->roles;
+
+        // dd($logged_in_roles);
+
+        $model_roles = $model->roles;
+
+        $model_is_admin = in_array('admin', $model_roles);
+
+        if ($model_is_admin)
+             return in_array('admin', $logged_in_roles);
+
+        return true;
     }
 
     /**

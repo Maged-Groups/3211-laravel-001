@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -57,6 +58,23 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Casts
+    protected function roles(): Attribute
+    {
+        return Attribute::make(
+            get: fn($str) => explode(',', $str),
+            set: fn($str) => implode(',', $str),
+        );
+    }
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn($val) => strtoupper($val),
+            set: fn($val) => ucwords(strtolower($val))
+        );
     }
 
     // Relationships

@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -83,6 +84,22 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        Gate::authorize('delete', $post);
+
+        return $post->delete() ? "Post Deleted Successfully" : "Cannot delete the post now, please try again later.";
+
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     */
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->where('id', $id)->first();
+
+        Gate::authorize('delete', $post);
+
+        return $post->restore() ? "Post Restored Successfully" : "Cannot restore the post now, please try again later.";
+
     }
 }
