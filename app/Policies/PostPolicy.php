@@ -6,8 +6,12 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
+use App\Traits\FunctionsTrait;
+
 class PostPolicy
 {
+    use FunctionsTrait;
+    
     /**
      * Determine whether the user can view any models.
      */
@@ -45,13 +49,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        $post_owner_id = $post->user_id;
-
-        $user_id = $user->id;
-
-        $is_admin = in_array('admin', $user->roles);
-
-        return $post_owner_id === $user_id || $is_admin;
+        return $this->ownResource($post->user_id);
 
     }
 

@@ -35,6 +35,35 @@
       "response": []
     },
     {
+      "name": "Show Post",
+      "id": "4bd50762-5627-42b1-b1cb-acaf04bfcf36",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{posts_api}}/60",
+          "host": [
+            "{{posts_api}}"
+          ],
+          "path": [
+            "60"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Delete Post",
       "id": "f924b677-c36f-4851-8622-c3617552b3a6",
       "request": {
@@ -88,35 +117,6 @@
           "path": [
             "60",
             "restore"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Show Post",
-      "id": "4bd50762-5627-42b1-b1cb-acaf04bfcf36",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/vnd.api+json",
-            "type": "text"
-          },
-          {
-            "key": "Accept",
-            "value": "application/vnd.api+json",
-            "type": "text"
-          }
-        ],
-        "url": {
-          "raw": "{{posts_api}}/60",
-          "host": [
-            "{{posts_api}}"
-          ],
-          "path": [
-            "60"
           ]
         }
       },

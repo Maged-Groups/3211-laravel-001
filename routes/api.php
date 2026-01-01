@@ -14,21 +14,29 @@ use App\Http\Controllers\{
     ReplyController
 };
 
+
+
 // Protected Routes
 Route::middleware(['auth:sanctum'])->group(function () {
 
+    Route::controller(PostController::class)->prefix("posts")->group(function () {
+        Route::get('{post}', 'show')->middleware('hasRoles:show-posts');
+        Route::get('{id}/restore', 'restore');
+    });
+
+
+    Route::middleware('hasRoles:hr')->resource('users', UserController::class);
+
+    Route::resource('posts', PostController::class)->except('show');
+
     Route::resources([
-        'users' => UserController::class,
-        'posts' => PostController::class,
+        // 'users' => UserController::class,
+        // 'posts' => PostController::class,
         'post-statuses' => PostStatusController::class,
         'reaction-types' => ReactionTypeController::class,
         'comments' => CommentController::class,
         'replies' => ReplyController::class,
     ]);
-
-    Route::controller(PostController::class)->prefix('posts')->group(function(){
-        Route::get('{id}/restore', 'restore');
-    });
 
     Route::controller(AuthController::class)->prefix('auth')->group(function () {
         Route::post('change-password', 'change_password');

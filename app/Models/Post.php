@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\Traits\BaseModelTrait;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -13,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 class Post extends BaseModel
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory, BaseModelTrait;
+    use HasFactory;
 
 
     // Relationships

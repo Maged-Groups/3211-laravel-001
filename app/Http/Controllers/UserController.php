@@ -14,9 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        Gate::authorize('viewAny', auth()->user());
+        // Gate::authorize('viewAny', auth()->user());
 
-        return User::all();
+        return User::paginate();
         // return User::get();
         // return User::all()->random()->id;
         // return User::inRandomOrder()->get();
@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        Gate::authorize('view', $user);
+        // Gate::authorize('view', $user);
 
         return $user;
     }
