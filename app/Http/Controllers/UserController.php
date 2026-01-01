@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -47,7 +48,11 @@ class UserController extends Controller
     {
         // Gate::authorize('view', $user);
 
-        return $user;
+        $userResource = UserResource::make($user);
+        
+        $response = $this->successResponse( message: "User retrieved successfully", data: $userResource);
+
+        return $response;
     }
 
     /**

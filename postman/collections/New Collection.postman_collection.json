@@ -49,12 +49,12 @@
           }
         ],
         "url": {
-          "raw": "{{users_api}}/35",
+          "raw": "{{users_api}}/5",
           "host": [
             "{{users_api}}"
           ],
           "path": [
-            "35"
+            "5"
           ]
         }
       },

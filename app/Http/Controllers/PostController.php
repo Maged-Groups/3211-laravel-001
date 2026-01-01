@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -34,9 +35,13 @@ class PostController extends Controller
 
         $per_page = $request->per_page ?? 10;
 
-        $posts = Post::paginate($per_page);
+        $posts = Post::with('user')->paginate($per_page);
 
-        return $posts;
+        $posts = PostResource::collection($posts);
+
+        $postsData = $this->successResponse(data: $posts);
+
+        return $postsData;
     }
 
     /**
@@ -60,7 +65,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return $post->load(['user', 'postStatus', 'comments.user']);
+        // $post =  $post->load(['user', 'postStatus', 'comments.user']);
+        $post =  $post->load(['user']);
+
+        $post = PostResource::make($post);
+
+        $postData = $this->successResponse(data: $post);
+
+        return $postData;
     }
 
     /**
