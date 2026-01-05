@@ -4,5 +4,66 @@
     "name": "Comments",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-  "item": []
+  "item": [
+    {
+      "name": "New Comment",
+      "id": "f748cbf3-0290-42ef-9e0d-3ed53e58394b",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "comment",
+              "value": "This is a comment",
+              "type": "text",
+              "uuid": "72ff1c1a-c551-4c61-a0e9-f74a56162623"
+            },
+            {
+              "key": "post_id",
+              "value": "50",
+              "type": "text",
+              "uuid": "51ceb389-9508-4fa4-8fb1-a02b9b9fd362"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{comments_api}}",
+          "host": [
+            "{{comments_api}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "id": "3826c6c7-2131-4aff-b2df-7011ab767b9b",
+      "key": "comments_api",
+      "value": ""
+    }
+  ]
 }

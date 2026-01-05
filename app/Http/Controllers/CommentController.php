@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotifyCommentMail;
 use App\Models\Comment;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -29,7 +33,42 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $data = $request->validated();
+        $user = auth()->user();
+        $commentor_name = $user->name;
+        $post_id = $data['post_id'];
+        $post = Post::find($post_id);
+        $post_owner_id = $post->user_id;
+        $post_title = $post->post_title;
+        $post_owner = User::find($post_owner_id);
+        $post_owner_name = $post_owner->name;
+        $post_owner_email = $post_owner->email;
+
+
+        // Store data
+        $data['user_id'] = $user->id;
+
+        if (Comment::create($data)) {
+            // Send Email notification to post owner
+            $mail_data = [
+                "post_id" => $post_id,
+                "post_owner_id" => $post_owner_id,
+                "post_owner_name" => $post_owner_name,
+                "post_owner_email" => $post_owner_email,
+                "commentor_name" => $commentor_name,
+                "post_title" => $post_title,
+            ];
+
+            // Mail::to($post_owner_email)->send(new NotifyCommentMail());
+            if (Mail::to('magedyaseengroups@gmail.com')->send(new NotifyCommentMail($mail_data))) // Static (My email for test)
+                return $this->successResponse('Comment added and notification email sent successfully.', 201);
+
+            return $this->successResponse('Comment added but failed to send notification email.', 207);
+
+        }
+
+        return $this->forbiddenResponse();
+
     }
 
     /**

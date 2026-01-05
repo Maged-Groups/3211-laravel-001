@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\NotifyCommentMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
@@ -18,5 +20,10 @@ Route::controller(InitController::class)->prefix('init')->group(
         Route::get('resources', 'resources');
     }
 );
+
+Route::get('test-email', function () {
+    Mail::to('magedyaseengroups@gmail.com')->send(new NotifyCommentMail());
+});
+
 
 Route::fallback(fn() => view('404'));

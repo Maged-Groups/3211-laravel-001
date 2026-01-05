@@ -23,12 +23,19 @@
           }
         ],
         "url": {
-          "raw": "{{base_api}}/posts",
+          "raw": "{{base_api}}/posts?page=10",
           "host": [
             "{{base_api}}"
           ],
           "path": [
             "posts"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "10",
+              "uuid": "59ad12f2-94dd-4aad-9c91-559286e1d4b3"
+            }
           ]
         }
       },

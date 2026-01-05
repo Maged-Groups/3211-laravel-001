@@ -2,16 +2,15 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCommentRequest extends FormRequest
+class StoreCommentRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->hasRoles('comment');
     }
 
     /**
@@ -22,7 +21,8 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'comment' => 'required|string|max:500',
+            'post_id' => 'required|integer|exists:posts,id',
         ];
     }
 }

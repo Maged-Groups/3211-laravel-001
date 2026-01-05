@@ -48,4 +48,5 @@ trait JsonResponsTrait
     {
         return $this->errorResponse($message, 500);
     }
+
 }

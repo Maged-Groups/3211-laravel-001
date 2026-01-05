@@ -12,6 +12,12 @@ class Comment extends BaseModel
     /** @use HasFactory<\Database\Factories\CommentFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'comment',
+        'post_id',
+        'user_id',
+    ];
+
     // Relationships
     public function replies(): HasMany
     {
