@@ -8,18 +8,18 @@ use Illuminate\Support\Facades\Artisan;
 
 class InitController extends Controller
 {
+    private $resources = [
+        'User',
+        'PostStatus',
+        'ReactionType',
+        'Post',
+        'Comment',
+        'Reply',
+        'Reaction'
+    ];
     function models()
     {
-        $models = [
-            'User',
-            'PostStatus',
-            'ReactionType',
-            'Post',
-            'Comment',
-            'Reply',
-            'Reaction'
-        ];
-        foreach ($models as $model) {
+        foreach ($this->resources as $model) {
             // php artisan make:model Post -a
             Artisan::call('make:model', ['name' => $model, '-a' => true]);
             sleep(1);
@@ -41,7 +41,8 @@ class InitController extends Controller
         Artisan::call('migrate:fresh', ['--seed' => true]);
     }
 
-    function fixes () {
+    function fixes()
+    {
         // Fix posts table (post_title)
         // loop all posts and change post title with a fake text from faker class
         // $posts = Post::all();
@@ -51,5 +52,13 @@ class InitController extends Controller
         //     $post->post_title = $title;
         //     $post->save();
         // }
+    }
+
+    function resources()
+    {
+        foreach ($this->resources as $resource) {
+            Artisan::call('make:resource', ['name' => "{$resource}Resource"]);
+            Artisan::call('make:resource', ['name' => "{$resource}Collection", "--collection" => true]);
+        }
     }
 }

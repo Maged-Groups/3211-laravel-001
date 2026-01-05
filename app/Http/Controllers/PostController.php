@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
@@ -16,28 +17,13 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        // return $request;
-        // $posts = Post::all();
-        // $posts = Post::with(['user', 'postStatus'])->get();
-        // $posts = Post::where('user_id', '=', 100)->get();
-        // $posts = Post::where('user_id', '=', '100')->get();
-        // Shorten the where method if the condition is (=)
-        // $posts = Post::where('user_id', '100')->get();
-        // $posts = Post::where('user_id', 350)->get();
-        // $posts = Post::where('user_id', 350)->where('post_status_id', 4)->get();
-        // $posts = Post::where(['user_id' => 350, 'post_status_id' => 4])->get();
-
-        // $posts = Post::where('post_title', 'like', '%ipsum%')->get();
-        // $posts = Post::whereAll(['post_title', 'post_body'], 'like', '%ipsum%')->get(); // AND
-        // $posts = Post::whereAny(['post_title', 'post_body'], 'like', '%ipsum%')->get(); // OR
-        // $posts = Post::all(['post_title', 'id', 'thumbnail']);
-        // $posts = Post::get(['post_title', 'id', 'thumbnail']);
+        
 
         $per_page = $request->per_page ?? 10;
 
         $posts = Post::with('user')->paginate($per_page);
 
-        $posts = PostResource::collection($posts);
+        $posts = PostCollection::make($posts);
 
         $postsData = $this->successResponse(data: $posts);
 

@@ -15,6 +15,7 @@ Route::controller(InitController::class)->prefix('init')->group(
         Route::get('db-fresh', 'dbFresh');
         Route::get('db-fresh-seed', 'dbFreshSeed');
         Route::get('fixes', 'fixes');
+        Route::get('resources', 'resources');
     }
 );
 
