@@ -23,7 +23,7 @@
           }
         ],
         "url": {
-          "raw": "{{base_api}}/posts?page=10",
+          "raw": "{{base_api}}/posts?page=4",
           "host": [
             "{{base_api}}"
           ],
@@ -33,8 +33,8 @@
           "query": [
             {
               "key": "page",
-              "value": "10",
-              "uuid": "59ad12f2-94dd-4aad-9c91-559286e1d4b3"
+              "value": "4",
+              "uuid": "5c61b06f-5267-4b22-9a29-748fa04dacb1"
             }
           ]
         }
@@ -88,12 +88,12 @@
           }
         ],
         "url": {
-          "raw": "{{posts_api}}/60",
+          "raw": "{{posts_api}}/155",
           "host": [
             "{{posts_api}}"
           ],
           "path": [
-            "60"
+            "155"
           ]
         }
       },
@@ -124,6 +124,35 @@
           "path": [
             "60",
             "restore"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Deleted Posts",
+      "id": "3397ade8-ca69-4086-8cb5-56b1a0c21163",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{posts_api}}/deleted",
+          "host": [
+            "{{posts_api}}"
+          ],
+          "path": [
+            "deleted"
           ]
         }
       },

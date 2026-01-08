@@ -14,22 +14,30 @@ class PostCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return [
-            "data" => $this->collection,
-            // "count" => count($this->collection),
-            'links' => [
-                'first' => $this->url(1),
-                'last' => $this->url($this->lastPage()),
-                'prev' => $this->previousPageUrl(),
-                'next' => $this->nextPageUrl(),
-            ],
-            'meta' => [
-                'current_page' => $this->currentPage(),
-                'last_page' => $this->lastPage(),
-                'per_page' => $this->perPage(),
-                'total' => $this->total(),
-            ],
-            "Extra" => "This is extra info"
-        ];
+        if ($request->page) {
+            return [
+                'data' => $this->collection,
+                // "count" => count($this->collection),
+                // conditionaly if paginated
+
+                'links' => [
+                    'first' => $this->url(1),
+                    'last' => $this->url($this->lastPage()),
+                    'prev' => $this->previousPageUrl(),
+                    'next' => $this->nextPageUrl(),
+                ],
+                'meta' => [
+                    'current_page' => $this->currentPage(),
+                    'last_page' => $this->lastPage(),
+                    'per_page' => $this->perPage(),
+                    'total' => $this->total(),
+                ],
+                'Extra' => 'This is extra info',
+            ];
+        } else {   
+            return [
+                'data' => $this->collection,
+            ];
+        }
     }
 }

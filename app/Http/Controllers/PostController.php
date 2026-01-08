@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
@@ -17,11 +18,17 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        
 
         $per_page = $request->per_page ?? 10;
 
-        $posts = Post::with('user')->paginate($per_page);
+        $posts = Post::with('user')->modified()->active()->paginate($per_page);
+        // $posts = Post::with('user')->modified()->recent()->get();
+        // $posts = DB::table('posts')
+        //     ->join('post_statuses', 'posts.post_status_id', '=', 'post_statuses.id')
+        //     ->join('users', 'users.id', '=', 'posts.user_id')
+        //     ->select('posts.*', 'post_statuses.type as post_status', 'users.name as user_name')
+        //     ->whereIn('posts.post_status_id', [1, 2, 7])
+        //     ->paginate($per_page);
 
         $posts = PostCollection::make($posts);
 
@@ -52,7 +59,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         // $post =  $post->load(['user', 'postStatus', 'comments.user']);
-        $post =  $post->load(['user']);
+        $post = $post->load(['user']);
 
         $post = PostResource::make($post);
 
@@ -84,7 +91,7 @@ class PostController extends Controller
     {
         Gate::authorize('delete', $post);
 
-        return $post->delete() ? "Post Deleted Successfully" : "Cannot delete the post now, please try again later.";
+        return $post->delete() ? 'Post Deleted Successfully' : 'Cannot delete the post now, please try again later.';
 
     }
 
@@ -97,7 +104,14 @@ class PostController extends Controller
 
         Gate::authorize('delete', $post);
 
-        return $post->restore() ? "Post Restored Successfully" : "Cannot restore the post now, please try again later.";
+        return $post->restore() ? 'Post Restored Successfully' : 'Cannot restore the post now, please try again later.';
 
+    }
+
+    public function deleted()
+    {
+        $posts = Post::onlyTrashed()->active()->modified()->get();
+
+        return $posts;
     }
 }

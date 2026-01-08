@@ -20,14 +20,14 @@ use App\Http\Controllers\{
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::controller(PostController::class)->prefix("posts")->group(function () {
+        Route::get('deleted', 'deleted');
         Route::get('{post}', 'show')->middleware('hasRoles:show-posts');
         Route::get('{id}/restore', 'restore');
     });
 
-
     Route::middleware('hasRoles:hr')->resource('users', UserController::class);
 
-    Route::resource('posts', PostController::class)->except('show');
+    Route::apiResource('posts', PostController::class)->except('show');
 
     Route::resources([
         // 'users' => UserController::class,
