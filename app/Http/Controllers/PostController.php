@@ -8,6 +8,7 @@ use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,10 +19,25 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        // $posts = Cache::remember('all_posts', now()->addSeconds(20), function () {
+        //     $per_page = $request->per_page ?? 10;
 
-        $per_page = $request->per_page ?? 10;
+        //     return Post::with('user')->modified()->active()->paginate($per_page);
+        // });
 
-        $posts = Post::with('user')->modified()->active()->paginate($per_page);
+
+        if (Cache::has('all_posts')) {
+            $posts = Cache::get('all_posts');
+        } else {
+            $per_page = $request->per_page ?? 10;
+
+            // $posts = Post::with('user')->modified()->active()->paginate($per_page);
+            // get only last 10 posts
+            $posts = Post::with('user')->modified()->active()->latest()->paginate($per_page);
+
+            Cache::forever('all_posts', $posts);
+        }
+
         // $posts = Post::with('user')->modified()->recent()->get();
         // $posts = DB::table('posts')
         //     ->join('post_statuses', 'posts.post_status_id', '=', 'post_statuses.id')
@@ -50,7 +66,19 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $postData = $request->all();
+        $postData['user_id'] = auth()->user()->id;
+
+        $post = Post::create($postData);
+
+        if ($post) {
+            // Clear cache
+            Cache::forget('all_posts');
+
+            return $this->successResponse(message: 'Post Created Successfully', data: $post);
+        }
+
+        return $this->forbiddenResponse(message: 'Cannot create the post now, please try again later.');
     }
 
     /**

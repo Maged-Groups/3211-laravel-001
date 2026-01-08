@@ -23,19 +23,12 @@
           }
         ],
         "url": {
-          "raw": "{{base_api}}/posts?page=4",
+          "raw": "{{base_api}}/posts",
           "host": [
             "{{base_api}}"
           ],
           "path": [
             "posts"
-          ],
-          "query": [
-            {
-              "key": "page",
-              "value": "4",
-              "uuid": "5c61b06f-5267-4b22-9a29-748fa04dacb1"
-            }
           ]
         }
       },
@@ -153,6 +146,57 @@
           ],
           "path": [
             "deleted"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Post",
+      "id": "1ab9eacd-b546-46bf-bff1-91926571a5d0",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.api+json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "post_title",
+              "value": "Post A",
+              "type": "text"
+            },
+            {
+              "key": "post_body",
+              "value": "Post A Body",
+              "type": "text"
+            },
+            {
+              "key": "thumbnail",
+              "value": "xxxxxxx",
+              "type": "text"
+            },
+            {
+              "key": "post_status_id",
+              "value": "2",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{posts_api}}",
+          "host": [
+            "{{posts_api}}"
           ]
         }
       },

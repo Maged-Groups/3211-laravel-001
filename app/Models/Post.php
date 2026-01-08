@@ -13,6 +13,15 @@ class Post extends BaseModel
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
 
+
+    protected $fillable = [
+        "post_title",
+        "post_body",
+        "thumbnail",
+        "user_id",
+        "post_status_id",
+    ];
+
     // Scopes
     public function scopeActive(Builder $query)
     {

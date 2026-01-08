@@ -11,7 +11,7 @@ class StorePostRequest extends BaseRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StorePostRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            //
+            "post_title" => 'required',
+            "post_body" => 'required',
+            "thumbnail" => 'required',
+            "post_status_id" => 'required',
         ];
     }
 }
